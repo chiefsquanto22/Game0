@@ -8,6 +8,7 @@ namespace Game0
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private SpriteFont _spriteFont;
 
         public Game1()
         {
@@ -26,6 +27,7 @@ namespace Game0
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteFont = Content.Load<SpriteFont>("Text Font");
 
             // TODO: use this.Content to load your game content here
         }
@@ -43,9 +45,10 @@ namespace Game0
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            _spriteBatch.Begin();
             // TODO: Add your drawing code here
-
+            _spriteBatch.DrawString(_spriteFont, "Should you choose to leave this place, press the Escape button. May your God be with you.", new Vector2(16,16),Color.Black);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

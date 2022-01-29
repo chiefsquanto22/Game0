@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Runtime;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,7 +14,7 @@ namespace Game0
         private PlayerHero playerHero;
         private Heros[] heros;
         private Texture2D texture;
-
+        Random rnd = new Random();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -35,12 +37,13 @@ namespace Game0
 
         protected override void LoadContent()
         {
+            texture = Content.Load<Texture2D>("chars");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             playerHero.LoadContent(Content);
             foreach (var hero in heros) hero.LoadContent(Content);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
             texture = Content.Load<Texture2D>("chars");
-           
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -58,13 +61,14 @@ namespace Game0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            foreach(var hero in heros)
+            foreach (var hero in heros)
             {
-                _spriteBatch.Draw(texture, hero.Position,)
+                hero.Sprite = new Rectangle(GraphicsDevice.Viewport.Width - rnd.Next(2, 3) * 16, rnd.Next(2, 3) * 16, 16, 16);
+                hero.Draw(_spriteBatch, texture);
             }
             // TODO: Add your drawing code here
-            _spriteBatch.DrawString(_spriteFont, "Should you choose to leave this place, press the Escape button. May your God be with you.", new Vector2(16,16),Color.Black);
-            _spriteBatch.DrawString(_spriteFont, "Where am I again?", new Vector2(), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Should you choose to leave this place, press the Escape button. May your God be with you.", new Vector2(16, 16), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Where am I again?", new Vector2(heros[1].Position.X + 16, heros[1].Position.Y), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

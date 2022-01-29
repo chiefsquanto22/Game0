@@ -1,2 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/John Neil/Source/Repos/Game0/Game0/Content/Text Font.spritefont","C:/Users/John Neil/Source/Repos/Game0/Game0/Content/bin/Windows/Content/Text Font.xnb","FontDescriptionProcessor","SpriteFontContent",2023,21538,0.22245
+"C:/Users/John Neil/Source/Repos/Game0/Game0/Content/chars.png","C:/Users/John Neil/Source/Repos/Game0/Game0/Content/bin/Windows/Content/chars.xnb","TextureProcessor","Texture2DContent",8492,409685,0.1328239
+"C:/Users/John Neil/Source/Repos/Game0/Game0/Content/Text Font.spritefont","C:/Users/John Neil/Source/Repos/Game0/Game0/Content/bin/Windows/Content/Text Font.xnb","FontDescriptionProcessor","SpriteFontContent",2023,21538,0.0773658
+"C:/Users/John Neil/Source/Repos/Game0/Game0/Content/weapons.png","C:/Users/John Neil/Source/Repos/Game0/Game0/Content/bin/Windows/Content/weapons.xnb","TextureProcessor","Texture2DContent",4229,409685,0.1465855

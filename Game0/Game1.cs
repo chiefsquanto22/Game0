@@ -9,6 +9,9 @@ namespace Game0
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
+        private PlayerHero playerHero;
+        private Heros[] heros;
+        private Texture2D texture;
 
         public Game1()
         {
@@ -20,15 +23,24 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            playerHero = new PlayerHero();
+            heros = new Heros[]
+            {
+                new Heros(){Position = new Vector2(100,200)},
+                new Heros(){Position = new Vector2(45, 300)},
+                new Heros(){Position = new Vector2(300, 400)}
+            };
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            playerHero.LoadContent(Content);
+            foreach (var hero in heros) hero.LoadContent(Content);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
-
+            texture = Content.Load<Texture2D>("chars");
+           
             // TODO: use this.Content to load your game content here
         }
 
@@ -46,8 +58,13 @@ namespace Game0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
+            foreach(var hero in heros)
+            {
+                _spriteBatch.Draw(texture, hero.Position,)
+            }
             // TODO: Add your drawing code here
             _spriteBatch.DrawString(_spriteFont, "Should you choose to leave this place, press the Escape button. May your God be with you.", new Vector2(16,16),Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Where am I again?", new Vector2(), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

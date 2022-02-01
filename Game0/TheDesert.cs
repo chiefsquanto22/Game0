@@ -20,6 +20,7 @@ namespace Game0
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Window.Title = "The Desert";
         }
 
         protected override void Initialize()

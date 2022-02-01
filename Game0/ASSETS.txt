@@ -2,4 +2,4 @@
 
 Content/spritesheet_caveman.png - created by Hapiel of OpenGameArt.org (https://opengameart.org/content/running-caveman), released under public domain
 
-Content/Text Font.spritefont (Cloister Black Light) - created by Typographer Mediengestaltung (https://www.1001fonts.com/cloister-black-font.html), licensed under the 1001Fonts Free For Commercial Use License (FFC)
+Content/Text Font.spritefont - Cloister Black Light created by Typographer Mediengestaltung (https://www.1001fonts.com/cloister-black-font.html), licensed under the 1001Fonts Free For Commercial Use License (FFC)

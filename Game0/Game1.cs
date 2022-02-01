@@ -11,10 +11,9 @@ namespace Game0
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
-        private PlayerHero playerHero;
-        private Heros[] heros;
         private Texture2D texture;
         Random rnd = new Random();
+        Vector2[] cactus = new Vector2[4];
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -25,24 +24,19 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            playerHero = new PlayerHero();
-            heros = new Heros[]
+            for (int i = 0; i < cactus.Length; i++)
             {
-                new Heros(){Position = new Vector2(100,200)},
-                new Heros(){Position = new Vector2(45, 300)},
-                new Heros(){Position = new Vector2(300, 400)}
-            };
+                cactus[i] = new Vector2(rnd.Next(0, GraphicsDevice.Viewport.Width) - 16, rnd.Next(0, GraphicsDevice.Viewport.Height) - 16);
+            }
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            texture = Content.Load<Texture2D>("chars");
+            texture = Content.Load<Texture2D>("colored_packed");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerHero.LoadContent(Content);
-            foreach (var hero in heros) hero.LoadContent(Content);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
-            texture = Content.Load<Texture2D>("chars");
 
             // TODO: use this.Content to load your game content here
         }
@@ -61,14 +55,13 @@ namespace Game0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            foreach (var hero in heros)
-            {
-                hero.Sprite = new Rectangle(GraphicsDevice.Viewport.Width - rnd.Next(2, 3) * 16, rnd.Next(2, 3) * 16, 16, 16);
-                hero.Draw(_spriteBatch, texture);
-            }
+            _spriteBatch.Draw(texture, cactus[0], new Rectangle(96, 16, 16, 16), Color.White);
+            _spriteBatch.Draw(texture, cactus[1], new Rectangle(96, 16, 16, 16), Color.White);
+            _spriteBatch.Draw(texture, cactus[2], new Rectangle(96, 16, 16, 16), Color.White);
+            _spriteBatch.Draw(texture, cactus[3], new Rectangle(96, 16, 16, 16), Color.White);
             // TODO: Add your drawing code here
-            _spriteBatch.DrawString(_spriteFont, "Should you choose to leave this place, press the Escape button. May your God be with you.", new Vector2(16, 16), Color.Black);
-            _spriteBatch.DrawString(_spriteFont, "Where am I again?", new Vector2(heros[1].Position.X + 16, heros[1].Position.Y), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "If you wanna leave the desert, all you gotta do is escape, partner.", new Vector2(16, 16), Color.Black);
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }

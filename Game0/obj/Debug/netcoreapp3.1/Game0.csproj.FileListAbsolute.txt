@@ -36,5 +36,5 @@ C:\Users\John Neil\Source\Repos\Game0\Game0\obj\Debug\netcoreapp3.1\Game0.dll
 C:\Users\John Neil\Source\Repos\Game0\Game0\obj\Debug\netcoreapp3.1\Game0.pdb
 C:\Users\John Neil\Source\Repos\Game0\Game0\obj\Debug\netcoreapp3.1\Game0.genruntimeconfig.cache
 C:\Users\John Neil\Source\Repos\Game0\Game0\bin\Debug\netcoreapp3.1\Content\Text Font.xnb
-C:\Users\John Neil\Source\Repos\Game0\Game0\bin\Debug\netcoreapp3.1\Content\chars.xnb
-C:\Users\John Neil\Source\Repos\Game0\Game0\bin\Debug\netcoreapp3.1\Content\weapons.xnb
+C:\Users\John Neil\Source\Repos\Game0\Game0\bin\Debug\netcoreapp3.1\Content\Tilesheet\colored_packed.xnb
+C:\Users\John Neil\Source\Repos\Game0\Game0\bin\Debug\netcoreapp3.1\Content\colored_packed.xnb

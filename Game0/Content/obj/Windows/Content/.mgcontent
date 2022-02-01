@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/John Neil/Source/Repos/Game0/Game0/Content/colored_packed.png</File>
-    <File>C:/Users/John Neil/Source/Repos/Game0/Game0/Content/spritesheet_caveman.png</File>
-    <File>C:/Users/John Neil/Source/Repos/Game0/Game0/Content/Text Font.spritefont</File>
+    <File>C:/Users/John Neil/source/repos/Game0/Game0/Content/colored_packed.png</File>
+    <File>C:/Users/John Neil/source/repos/Game0/Game0/Content/spritesheet_caveman.png</File>
+    <File>C:/Users/John Neil/source/repos/Game0/Game0/Content/Text Font.spritefont</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

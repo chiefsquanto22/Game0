@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dm+7cmwbyiHXd1mQ7e9KORhsesl6wAXSvPIWXl59FgTgCaevqZNKNTMe6h4HowNaa/iG9BUpv4yQbrig2pMdGQ==",
+  "dgSpecHash": "dyv+I0ZyYOQADlCyjmTrzt7/bDhSRQGgEFCfVzkUNMOB2SZs+zA7AGLYwMrD4DmLwCXut2i0Hm73SzQ+B+PcNA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\Game0.csproj",
+  "projectFilePath": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\TheDesert.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\John Neil\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\John Neil\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",

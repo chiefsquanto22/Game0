@@ -7380,9 +7380,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\Game0.csproj",
-      "projectName": "Game0",
-      "projectPath": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\Game0.csproj",
+      "projectUniqueName": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\TheDesert.csproj",
+      "projectName": "TheDesert",
+      "projectPath": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\TheDesert.csproj",
       "packagesPath": "C:\\Users\\John Neil\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\John Neil\\Source\\Repos\\Game0\\Game0\\obj\\",
       "projectStyle": "PackageReference",
@@ -7444,7 +7444,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

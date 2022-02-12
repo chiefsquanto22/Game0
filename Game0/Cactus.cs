@@ -12,7 +12,7 @@ namespace Game0
         Texture2D texture;
         Color color = Color.White;
 
-        public Vector2 Position { get; set; }
+        public Vector2 Position;
 
         public Cactus(Game game)
         {
@@ -26,6 +26,25 @@ namespace Game0
             texture = game.Content.Load<Texture2D>("colored_packed");
         }
 
+        public void Update(GameTime gameTime)
+        {
+            if (Position.X < 0) Position.X = game.GraphicsDevice.Viewport.Width;
+            if (Position.Y < 0) Position.Y = game.GraphicsDevice.Viewport.Height;
+        }
+        public void Move(bool direction, bool moving)
+        {
+            if (direction && moving)
+            {
+
+                Position += new Vector2(1, 0);
+            }
+            if (!direction && moving)
+            {
+                Position += new Vector2(-1, 0);
+            }
+            
+        }
+        
         public void Draw(SpriteBatch spriteBatch)
         {
             if (texture is null) throw new InvalidOperationException("Texture must be loaded to render");

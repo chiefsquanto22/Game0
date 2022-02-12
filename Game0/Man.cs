@@ -13,12 +13,19 @@ namespace Game0
         /// The position of the man
         /// </summary>
         private Vector2 position = new Vector2(200, 200);
-        private bool flipped;
+        public bool Flipped;
+        public bool Moving;
         private Texture2D texture;
         private double animationTimer;
         private short animationFrameX = 0;
         private short animationFrameY = 0;
         KeyboardState keyboardState;
+        Game game;
+
+        public Man(Game game)
+        {
+            this.game = game;
+        }
         /// <summary>
         /// Loads the texture to render
         /// </summary>
@@ -34,21 +41,32 @@ namespace Game0
         public void Update(GameTime gameTime)
         {
             keyboardState = Keyboard.GetState();
-
+            Moving = false;
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)) position += new Vector2(0, -1);
-            if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)) position += new Vector2(0, 1);
+            if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
+            {
+                position += new Vector2(0, -1);
+                Moving = true;
+            }
+            if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
+            {
+                position += new Vector2(0, 1);
+                Moving = true;
+            }
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
                 position += new Vector2(-1, 0);
-                flipped = true;
+                Flipped = true;
+                Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
                 position += new Vector2(1, 0);
-                flipped = false;
+                Flipped = false;
+                Moving = true;
             }
-            if (flipped)
+
+            if (Flipped)
             {
                 if (animationTimer > .5)
                 {
@@ -76,6 +94,9 @@ namespace Game0
                     animationTimer -= .5;
                 }
             }
+
+            if (position.X < 0) position.X = game.GraphicsDevice.Viewport.Width;
+            if (position.Y < 0) position.Y = game.GraphicsDevice.Viewport.Height;
         }
         /// <summary>
         /// Draws the sprite 
@@ -84,7 +105,7 @@ namespace Game0
         /// <param name="spriteBatch">The sprite batch to draw with</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            SpriteEffects spriteEffects = (flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            SpriteEffects spriteEffects = (Flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             var source = new Rectangle(animationFrameX * 32, animationFrameY * 32, 32, 32);
             spriteBatch.Draw(texture, position, source, Color.White);
         }

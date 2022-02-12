@@ -34,7 +34,7 @@ namespace Game0
                 new Cactus(this)
             };
 
-            man = new Man();
+            man = new Man(this);
 
             base.Initialize();
         }
@@ -56,7 +56,11 @@ namespace Game0
                 Exit();
             man.Update(gameTime);
             // TODO: Add your update logic here
-
+            foreach(Cactus cac in cactus)
+            {
+                cac.Move(man.Flipped, man.Moving);
+                cac.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 

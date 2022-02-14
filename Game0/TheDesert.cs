@@ -58,8 +58,7 @@ namespace Game0
             // TODO: Add your update logic here
             foreach(Cactus cac in cactus)
             {
-                cac.Move(man.Flipped, man.Moving);
-                cac.Update(gameTime);
+                cac.Update(man.Position);
             }
             base.Update(gameTime);
         }

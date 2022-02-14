@@ -26,23 +26,11 @@ namespace Game0
             texture = game.Content.Load<Texture2D>("colored_packed");
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(Vector2 direction)
         {
             if (Position.X < 0) Position.X = game.GraphicsDevice.Viewport.Width;
             if (Position.Y < 0) Position.Y = game.GraphicsDevice.Viewport.Height;
-        }
-        public void Move(bool direction, bool moving)
-        {
-            if (direction && moving)
-            {
-
-                Position += new Vector2(1, 0);
-            }
-            if (!direction && moving)
-            {
-                Position += new Vector2(-1, 0);
-            }
-            
+            Position += direction;
         }
         
         public void Draw(SpriteBatch spriteBatch)

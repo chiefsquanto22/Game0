@@ -12,7 +12,7 @@ namespace Game0
         /// <summary>
         /// The position of the man
         /// </summary>
-        private Vector2 position = new Vector2(200, 200);
+        public Vector2 Position = new Vector2(200, 200);
         public bool Flipped;
         public bool Moving;
         private Texture2D texture;
@@ -45,23 +45,23 @@ namespace Game0
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
             {
-                position += new Vector2(0, -1);
+                Position += new Vector2(0, -1);
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
             {
-                position += new Vector2(0, 1);
+                Position += new Vector2(0, 1);
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
-                position += new Vector2(-1, 0);
+                Position += new Vector2(-1, 0);
                 Flipped = true;
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
-                position += new Vector2(1, 0);
+                Position += new Vector2(1, 0);
                 Flipped = false;
                 Moving = true;
             }
@@ -95,8 +95,8 @@ namespace Game0
                 }
             }
 
-            if (position.X < 0) position.X = game.GraphicsDevice.Viewport.Width;
-            if (position.Y < 0) position.Y = game.GraphicsDevice.Viewport.Height;
+            if (Position.X < 0) Position.X = game.GraphicsDevice.Viewport.Width;
+            if (Position.Y < 0) Position.Y = game.GraphicsDevice.Viewport.Height;
         }
         /// <summary>
         /// Draws the sprite 
@@ -107,7 +107,7 @@ namespace Game0
         {
             SpriteEffects spriteEffects = (Flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             var source = new Rectangle(animationFrameX * 32, animationFrameY * 32, 32, 32);
-            spriteBatch.Draw(texture, position, source, Color.White);
+            spriteBatch.Draw(texture, Position, source, Color.White);
         }
     }
 }

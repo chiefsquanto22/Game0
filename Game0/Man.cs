@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using TheDesert.Collision;
+using tainicom.Aether.Physics2D.Dynamics;
+using tainicom.Aether.Physics2D.Dynamics.Contacts;
 namespace Game0
 {
     public class Man
@@ -21,10 +24,17 @@ namespace Game0
         private short animationFrameY = 0;
         KeyboardState keyboardState;
         Game game;
+        private Body body;
+        private BoundingRectangle bounds;
+        public BoundingRectangle Bounds => bounds;
+        public bool Colliding { get; protected set; }
 
-        public Man(Game game)
+        public Man(Game game, Body body)
         {
+            this.body = body;
             this.game = game;
+            this.bounds = new BoundingRectangle(new Vector2(200 - 16, 200 - 16), 16, 16);
+            this.body.OnCollision += CollisionHandler;
         }
         /// <summary>
         /// Loads the texture to render
@@ -97,6 +107,9 @@ namespace Game0
 
             if (Position.X < 0) Position.X = game.GraphicsDevice.Viewport.Width;
             if (Position.Y < 0) Position.Y = game.GraphicsDevice.Viewport.Height;
+            if (Position.X > game.GraphicsDevice.Viewport.Width) Position.X = 0;
+            if (Position.Y > game.GraphicsDevice.Viewport.Height) Position.Y = 0;
+            Colliding = false;
         }
         /// <summary>
         /// Draws the sprite 
@@ -108,6 +121,11 @@ namespace Game0
             SpriteEffects spriteEffects = (Flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             var source = new Rectangle(animationFrameX * 32, animationFrameY * 32, 32, 32);
             spriteBatch.Draw(texture, Position, source, Color.White);
+        }
+        private bool CollisionHandler(Fixture fixture, Fixture other, Contact contact)
+        {
+            Colliding = true;
+            return true;
         }
     }
 }

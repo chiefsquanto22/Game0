@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Runtime;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using tainicom.Aether.Physics2D.Dynamics;
 namespace Game0
 {
     public class TheDesert : Game
@@ -11,10 +12,10 @@ namespace Game0
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
-        private Texture2D texture;
         private Man man;
         Random rnd = new Random();
-        Cactus[] cactus;
+        List<Cactus> cactus;
+        private World world;
         public TheDesert()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,14 +28,35 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            cactus = new Cactus[]{
-                new Cactus(this),
-                new Cactus(this),
-                new Cactus(this),
-                new Cactus(this)
-            };
 
-            man = new Man(this);
+            world = new World();
+            world.Gravity = Vector2.Zero;
+            var edges = new Body[] {
+            world.CreateEdge(new Vector2(0, 0), new Vector2(0, GraphicsDevice.Viewport.Width)),
+            world.CreateEdge(new Vector2(0, 0), new Vector2(0, GraphicsDevice.Viewport.Height)),
+            world.CreateEdge(new Vector2(GraphicsDevice.Viewport.Width, 0), new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height)),
+            world.CreateEdge(new Vector2(GraphicsDevice.Viewport.Height, 0), new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height)),
+            };
+            foreach (var edge in edges)
+            {
+                edge.BodyType = BodyType.Static;
+                edge.SetRestitution(1.0f);
+            }
+
+            cactus = new List<Cactus>();
+            for (int i = 0; i < 4; i++)
+            {
+                var position = new Vector2(
+                    rnd.Next(0, GraphicsDevice.Viewport.Width - 16),
+                    rnd.Next(0, GraphicsDevice.Viewport.Height - 16)
+                    );
+                var body = world.CreateRectangle(16, 16, 1, position, 1, BodyType.Dynamic);
+                body.LinearVelocity = new Vector2(10, 10);
+                body.SetRestitution(1);
+                body.AngularVelocity = (float)rnd.NextDouble() * MathHelper.Pi - MathHelper.PiOver2;
+                cactus.Add(new Cactus(this, body));
+            }
+            man = new Man(this, world.CreateRectangle(16, 16, 1));
 
             base.Initialize();
         }
@@ -56,10 +78,7 @@ namespace Game0
                 Exit();
             man.Update(gameTime);
             // TODO: Add your update logic here
-            foreach(Cactus cac in cactus)
-            {
-                cac.Update(man.Position);
-            }
+            world.Step((float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -67,14 +86,11 @@ namespace Game0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
-            foreach (Cactus cac in cactus)
-            {
-                cac.Draw(_spriteBatch);
-            }
+            foreach (Cactus cac in cactus) cac.Draw(_spriteBatch);
             man.Draw(gameTime, _spriteBatch);
             // TODO: Add your drawing code here
             _spriteBatch.DrawString(_spriteFont, "If you wanna leave the desert, all you gotta do is escape, partner.", new Vector2(16, 16), Color.Black);
-            _spriteBatch.DrawString(_spriteFont, "Be careful if you come back though. These cacti like to move.", new Vector2(16, 32), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Punch a cactus. You won't.", new Vector2(16, 32), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -51,9 +51,10 @@ namespace Game0
                     rnd.Next(0, GraphicsDevice.Viewport.Height - 16)
                     );
                 var body = world.CreateRectangle(16, 16, 1, position, 1, BodyType.Dynamic);
-                body.LinearVelocity = new Vector2(10, 10);
+                body.Rotation = 0;
+                body.LinearVelocity = new Vector2(0, 0);
                 body.SetRestitution(1);
-                body.AngularVelocity = (float)rnd.NextDouble() * MathHelper.Pi - MathHelper.PiOver2;
+                body.AngularVelocity = 0;
                 cactus.Add(new Cactus(this, body));
             }
             man = new Man(this, world.CreateRectangle(16, 16, 1));
@@ -74,8 +75,21 @@ namespace Game0
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            foreach (var cac in cactus) cac.Update(gameTime);
+            foreach(var cac in cactus)
+            {
+                if (man.Bounds.CollidesWith(cac.Bounds))
+                {
+                    man.Colliding = true;
+                    cac.Colliding = true;
+                    Vector2 collisionAxis = cac.Center - man.Center;
+                    collisionAxis.Normalize();
+                    float angle = (float)System.Math.Acos(Vector2.Dot(collisionAxis, Vector2.UnitX));
+
+                }
+            }
             man.Update(gameTime);
             // TODO: Add your update logic here
             world.Step((float)gameTime.ElapsedGameTime.TotalSeconds);

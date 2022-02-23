@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/John/source/repos/TheDesert/Game0/Content/colored_packed.png</SourceFile>
+  <SourceTime>2022-02-10T12:46:50.7581015-06:00</SourceTime>
+  <DestFile>C:/Users/John/source/repos/TheDesert/Game0/Content/bin/Windows/colored_packed.xnb</DestFile>
+  <DestTime>2022-02-11T10:28:20.2822482-06:00</DestTime>
+  <Importer>TextureImporter</Importer>
+  <ImporterTime>2020-08-10T11:17:54-05:00</ImporterTime>
+  <Processor>TextureProcessor</Processor>
+  <ProcessorTime>2020-08-10T11:17:54-05:00</ProcessorTime>
+  <Parameters>
+    <Key>ColorKeyColor</Key>
+    <Value>71,45,60,255</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ColorKeyEnabled</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>GenerateMipmaps</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>ResizeToPowerOfTwo</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>MakeSquare</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Color</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

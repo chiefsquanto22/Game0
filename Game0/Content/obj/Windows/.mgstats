@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/John/source/repos/TheDesert/Game0/Content/colored_packed.png","C:/Users/John/source/repos/TheDesert/Game0/Content/bin/Windows/colored_packed.xnb","TextureProcessor","Texture2DContent",23076,1081429,1.6554143
+"C:/Users/John/source/repos/TheDesert/Game0/Content/spritesheet_caveman.png","C:/Users/John/source/repos/TheDesert/Game0/Content/bin/Windows/spritesheet_caveman.xnb","TextureProcessor","Texture2DContent",4591,65621,0.0529338
+"C:/Users/John/source/repos/TheDesert/Game0/Content/Text Font.spritefont","C:/Users/John/source/repos/TheDesert/Game0/Content/bin/Windows/Text Font.xnb","FontDescriptionProcessor","SpriteFontContent",2083,21538,0.9571272

@@ -89,6 +89,7 @@ namespace Game0
                     float angle = (float)System.Math.Acos(Vector2.Dot(collisionAxis, Vector2.UnitX));
 
                 }
+                cactus.Update();
             }
             man.Update(gameTime);
             // TODO: Add your update logic here

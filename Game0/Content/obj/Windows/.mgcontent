@@ -4,11 +4,13 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/John/source/repos/TheDesert/Game0/Content/colored_packed.png</File>
-    <File>C:/Users/John/source/repos/TheDesert/Game0/Content/spritesheet_caveman.png</File>
-    <File>C:/Users/John/source/repos/TheDesert/Game0/Content/Text Font.spritefont</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/colored_packed.png</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/spritesheet_caveman.png</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/Text Font.spritefont</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/tilemap.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

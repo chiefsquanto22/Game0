@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using tainicom.Aether.Physics2D.Dynamics;
+
 namespace Game0
 {
     public class TheDesert : Game
@@ -16,6 +17,7 @@ namespace Game0
         Random rnd = new Random();
         List<Cactus> cactus;
         private World world;
+        private TileMap _tileMap;
         public TheDesert()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -58,7 +60,7 @@ namespace Game0
                 cactus.Add(new Cactus(this, body));
             }
             man = new Man(this, world.CreateRectangle(16, 16, 1));
-
+            _tileMap = new TileMap("map.txt");
             base.Initialize();
         }
 
@@ -68,7 +70,7 @@ namespace Game0
             _spriteFont = Content.Load<SpriteFont>("Text Font");
             man.LoadContent(Content);
             foreach (Cactus cac in cactus) cac.LoadContent();
-
+            _tileMap.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -100,6 +102,7 @@ namespace Game0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
+            _tileMap.Draw(gameTime, _spriteBatch);
             foreach (Cactus cac in cactus) cac.Draw(_spriteBatch);
             man.Draw(gameTime, _spriteBatch);
             // TODO: Add your drawing code here

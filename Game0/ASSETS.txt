@@ -1,5 +1,7 @@
-﻿Content/colored_packed.png - created by Kenney.nl of OpenGameArt.org (https://opengameart.org/content/running-caveman-spritesheet), released under public domain
+﻿Content/colored_packed.png - created by Kinney as part of his 1-Bit Pack on OpenGameArt.Org (https://opengameart.org/content/1-bit-pack), released under public domain
 
-Content/spritesheet_caveman.png - created by Hapiel of OpenGameArt.org (https://opengameart.org/content/running-caveman), released under public domain
+Content/spritesheet_caveman.png - created by Hapiel of OpenGameArt.org (https://opengameart.org/content/running-caveman), licensed under CC-BY 3.0
 
 Content/Text Font.spritefont - Cloister Black Light created by Typographer Mediengestaltung (https://www.1001fonts.com/cloister-black-font.html), licensed under the 1001Fonts Free For Commercial Use License (FFC)
+
+Content/tilemap.png - created by Kutejnikov of OpenGameArt.org (https://opengameart.org/content/ground-tilemap), licensed under CC-BY 3.0 and OGA-BY 3.0

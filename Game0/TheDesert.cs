@@ -30,20 +30,7 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            world = new World();
-            world.Gravity = Vector2.Zero;
-            var edges = new Body[] {
-            world.CreateEdge(new Vector2(0, 0), new Vector2(0, GraphicsDevice.Viewport.Width)),
-            world.CreateEdge(new Vector2(0, 0), new Vector2(0, GraphicsDevice.Viewport.Height)),
-            world.CreateEdge(new Vector2(GraphicsDevice.Viewport.Width, 0), new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height)),
-            world.CreateEdge(new Vector2(GraphicsDevice.Viewport.Height, 0), new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height)),
-            };
-            foreach (var edge in edges)
-            {
-                edge.BodyType = BodyType.Static;
-                edge.SetRestitution(1.0f);
-            }
+            
 
             cactus = new List<Cactus>();
             for (int i = 0; i < 4; i++)
@@ -52,14 +39,9 @@ namespace Game0
                     rnd.Next(0, GraphicsDevice.Viewport.Width - 16),
                     rnd.Next(0, GraphicsDevice.Viewport.Height - 16)
                     );
-                var body = world.CreateRectangle(16, 16, 1, position, 1, BodyType.Dynamic);
-                body.Rotation = 0;
-                body.LinearVelocity = new Vector2(0, 0);
-                body.SetRestitution(1);
-                body.AngularVelocity = 0;
-                cactus.Add(new Cactus(this, body));
+                cactus.Add(new Cactus(this));
             }
-            man = new Man(this, world.CreateRectangle(16, 16, 1));
+            man = new Man(this);
             _tileMap = new TileMap("map.txt");
             base.Initialize();
         }

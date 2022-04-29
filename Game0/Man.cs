@@ -25,18 +25,16 @@ namespace Game0
         private short animationFrameY = 0;
         KeyboardState keyboardState;
         Game game;
-        private Body body;
         private BoundingRectangle bounds;
         public BoundingRectangle Bounds => bounds;
         public bool Colliding { get; set; }
 
-        public Man(Game game, Body body)
+        public Man(Game game)
         {
-            this.body = body;
+            
             this.game = game;
             this.bounds = new BoundingRectangle(new Vector2(200, 200), 32, 32);
             Center = new Vector2(origin.X + 8, origin.Y + 8);
-            this.body.OnCollision += CollisionHandler;
         }
         /// <summary>
         /// Loads the texture to render
@@ -112,6 +110,7 @@ namespace Game0
             if (origin.X > game.GraphicsDevice.Viewport.Width) origin.X = -16;
             if (origin.Y > game.GraphicsDevice.Viewport.Height) origin.Y = -32;
             Colliding = false;
+            bounds.Position = origin;
         }
         /// <summary>
         /// Draws the sprite 

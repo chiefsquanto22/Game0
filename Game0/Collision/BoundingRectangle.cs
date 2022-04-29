@@ -15,12 +15,14 @@ namespace TheDesert.Collision
         public float Right => X + Width;
         public float Top => Y;
         public float Bottom => Y + Height;
-        public BoundingRectangle(float x,float y,float width, float height)
+        public Vector2 Position;
+        public BoundingRectangle(float x, float y, float width, float height)
         {
             X = x;
             Y = y;
             Width = width;
             Height = height;
+            Position = new Vector2(X, Y);
         }
         public BoundingRectangle(Vector2 position, float width, float height)
         {

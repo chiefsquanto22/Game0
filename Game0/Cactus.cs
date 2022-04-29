@@ -18,20 +18,19 @@ namespace Game0
         public BoundingRectangle Bounds => bounds;
         Vector2 origin;
         public Vector2 Center;
-        private Body body;
+        
         public bool Colliding { get; set; }
         
 
-        public Cactus(Game game, Body body)
+        public Cactus(Game game)
         {
-            this.body = body;
             this.game = game;
             this.rnd = new Random();
             origin = new Vector2(49, 49);
             
             this.bounds = new BoundingRectangle(origin, 16, 16);
             Center = new Vector2(origin.X + 8, origin.Y + 8);
-            this.body.OnCollision += CollisionHandler;
+            
         }
 
         public void LoadContent()
@@ -52,7 +51,7 @@ namespace Game0
         {
             if (texture is null) throw new InvalidOperationException("Texture must be loaded to render");
             var source = new Rectangle(96, 16, 16, 16);
-            spriteBatch.Draw(texture, body.Position, source, color, body.Rotation, origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, origin, color);
         }
         private bool CollisionHandler(Fixture fixture, Fixture other, Contact contact)
         {

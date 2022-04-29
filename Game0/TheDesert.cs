@@ -16,7 +16,7 @@ namespace Game0
         private Man man;
         Random rnd = new Random();
         List<Cactus> cactus;
-        private World world;
+
         private TileMap _tileMap;
         public TheDesert()
         {
@@ -30,7 +30,7 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+
 
             cactus = new List<Cactus>();
             for (int i = 0; i < 4; i++)
@@ -39,7 +39,8 @@ namespace Game0
                     rnd.Next(0, GraphicsDevice.Viewport.Width - 16),
                     rnd.Next(0, GraphicsDevice.Viewport.Height - 16)
                     );
-                cactus.Add(new Cactus(this));
+
+                cactus.Add(new Cactus(this, position));
             }
             man = new Man(this);
             _tileMap = new TileMap("map.txt");
@@ -62,21 +63,17 @@ namespace Game0
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             foreach (var cac in cactus) cac.Update(gameTime);
-            foreach(var cac in cactus)
+            foreach (var cac in cactus)
             {
                 if (man.Bounds.CollidesWith(cac.Bounds))
                 {
                     man.Colliding = true;
-                    cac.Colliding = true;
-                    Vector2 collisionAxis = cac.Center - man.Center;
-                    collisionAxis.Normalize();
-                    float angle = (float)System.Math.Acos(Vector2.Dot(collisionAxis, Vector2.UnitX));
-
+                    
                 }
             }
             man.Update(gameTime);
             // TODO: Add your update logic here
-            world.Step((float)gameTime.ElapsedGameTime.TotalSeconds);
+
             base.Update(gameTime);
         }
 
@@ -90,6 +87,7 @@ namespace Game0
             // TODO: Add your drawing code here
             _spriteBatch.DrawString(_spriteFont, "If you wanna leave the desert, all you gotta do is escape, partner.", new Vector2(16, 16), Color.Black);
             _spriteBatch.DrawString(_spriteFont, "Punch a cactus. You won't.", new Vector2(16, 32), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(16, 46), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

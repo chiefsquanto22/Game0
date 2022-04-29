@@ -15,7 +15,7 @@ namespace Game0
         /// <summary>
         /// The position of the man
         /// </summary>
-        private Vector2 origin = new Vector2(200, 200);
+        private Vector2 position = new Vector2(200, 200);
         public Vector2 Center;
         public bool Flipped;
         public bool Moving;
@@ -28,13 +28,14 @@ namespace Game0
         private BoundingRectangle bounds;
         public BoundingRectangle Bounds => bounds;
         public bool Colliding { get; set; }
+        public int Health => health;
+        private int health = 10;
 
         public Man(Game game)
         {
-            
             this.game = game;
             this.bounds = new BoundingRectangle(new Vector2(200, 200), 32, 32);
-            Center = new Vector2(origin.X + 8, origin.Y + 8);
+            Center = new Vector2(position.X + 8, position.Y + 8);
         }
         /// <summary>
         /// Loads the texture to render
@@ -55,23 +56,23 @@ namespace Game0
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
             {
-                origin += new Vector2(0, -1);
+                position += new Vector2(0, -1);
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
             {
-                origin += new Vector2(0, 1);
+                position += new Vector2(0, 1);
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
             {
-                origin += new Vector2(-1, 0);
+                position += new Vector2(-1, 0);
                 Flipped = true;
                 Moving = true;
             }
             if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
             {
-                origin += new Vector2(1, 0);
+                position += new Vector2(1, 0);
                 Flipped = false;
                 Moving = true;
             }
@@ -104,13 +105,13 @@ namespace Game0
                     animationTimer -= .5;
                 }
             }
-
-            if (origin.X < -16) origin.X = game.GraphicsDevice.Viewport.Width;
-            if (origin.Y < -32) origin.Y = game.GraphicsDevice.Viewport.Height;
-            if (origin.X > game.GraphicsDevice.Viewport.Width) origin.X = -16;
-            if (origin.Y > game.GraphicsDevice.Viewport.Height) origin.Y = -32;
+            
+            if (position.X < -16) position.X = game.GraphicsDevice.Viewport.Width;
+            if (position.Y < -32) position.Y = game.GraphicsDevice.Viewport.Height;
+            if (position.X > game.GraphicsDevice.Viewport.Width) position.X = -16;
+            if (position.Y > game.GraphicsDevice.Viewport.Height) position.Y = -32;
             Colliding = false;
-            bounds.Position = origin;
+            bounds.Position = position;
         }
         /// <summary>
         /// Draws the sprite 
@@ -120,14 +121,8 @@ namespace Game0
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             Color color = (Colliding) ? Color.Red : Color.White;
-            SpriteEffects spriteEffects = (Flipped) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             var source = new Rectangle(animationFrameX * 32, animationFrameY * 32, 32, 32);
-            spriteBatch.Draw(texture, origin, source, Color.White);
-        }
-        private bool CollisionHandler(Fixture fixture, Fixture other, Contact contact)
-        {
-            Colliding = true;
-            return true;
+            spriteBatch.Draw(texture, position, source, color);
         }
     }
 }

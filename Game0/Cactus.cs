@@ -50,10 +50,5 @@ namespace Game0
             var source = new Rectangle(96, 16, 16, 16);
             spriteBatch.Draw(texture, position, source, color);
         }
-        private bool CollisionHandler(Fixture fixture, Fixture other, Contact contact)
-        {
-            Colliding = true;
-            return true;
-        }
     }
 }

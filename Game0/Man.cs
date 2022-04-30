@@ -21,6 +21,7 @@ namespace Game0
         public bool Moving;
         private Texture2D texture;
         private double animationTimer;
+        private double healthTimer;
         private short animationFrameX = 0;
         private short animationFrameY = 0;
         KeyboardState keyboardState;
@@ -53,7 +54,9 @@ namespace Game0
         {
             keyboardState = Keyboard.GetState();
             Moving = false;
+
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            healthTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W))
             {
                 position += new Vector2(0, -1);
@@ -77,7 +80,7 @@ namespace Game0
                 Moving = true;
             }
 
-            if (Flipped)
+            if (Flipped && Moving)
             {
                 if (animationTimer > .5)
                 {
@@ -91,7 +94,7 @@ namespace Game0
                     animationTimer -= .5;
                 }
             }
-            else
+            else if (Moving)
             {
                 if (animationTimer > .5)
                 {
@@ -105,13 +108,21 @@ namespace Game0
                     animationTimer -= .5;
                 }
             }
-            
+            if(healthTimer>1.0)
+            {
+                if (Colliding)
+                {
+                    health--;
+                }
+                healthTimer-=1.0;
+            }
             if (position.X < -16) position.X = game.GraphicsDevice.Viewport.Width;
             if (position.Y < -32) position.Y = game.GraphicsDevice.Viewport.Height;
             if (position.X > game.GraphicsDevice.Viewport.Width) position.X = -16;
             if (position.Y > game.GraphicsDevice.Viewport.Height) position.Y = -32;
             Colliding = false;
-            bounds.Position = position;
+            bounds.X = position.X;
+            bounds.Y = position.Y;
         }
         /// <summary>
         /// Draws the sprite 

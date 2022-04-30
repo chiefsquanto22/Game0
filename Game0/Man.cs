@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 using TheDesert.Collision;
-using tainicom.Aether.Physics2D.Dynamics;
-using tainicom.Aether.Physics2D.Dynamics.Contacts;
+
 namespace Game0
 {
     public class Man
@@ -24,6 +24,7 @@ namespace Game0
         private double healthTimer;
         private short animationFrameX = 0;
         private short animationFrameY = 0;
+        private SoundEffect cactusHurt;
         KeyboardState keyboardState;
         Game game;
         private BoundingRectangle bounds;
@@ -45,6 +46,7 @@ namespace Game0
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("spritesheet_caveman");
+            cactusHurt = content.Load<SoundEffect>("Hit_Hurt");
         }
         /// <summary>
         /// Updates the sprite to run
@@ -113,6 +115,7 @@ namespace Game0
                 if (Colliding)
                 {
                     health--;
+                    cactusHurt.Play();
                 }
                 healthTimer-=1.0;
             }

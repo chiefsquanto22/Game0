@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using tainicom.Aether.Physics2D.Dynamics;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game0
 {
@@ -14,6 +15,8 @@ namespace Game0
         private SpriteBatch _spriteBatch;
         private SpriteFont _spriteFont;
         private Man man;
+        
+        private Song backgroundNoise;
         Random rnd = new Random();
         List<Cactus> cactus;
 
@@ -51,6 +54,11 @@ namespace Game0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
+            
+            backgroundNoise = Content.Load<Song>("wind1");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundNoise);
+
             man.LoadContent(Content);
             foreach (Cactus cac in cactus) cac.LoadContent();
             _tileMap.LoadContent(Content);
@@ -68,7 +76,6 @@ namespace Game0
                 if (man.Bounds.CollidesWith(cac.Bounds))
                 {
                     man.Colliding = true;
-                    
                 }
             }
             man.Update(gameTime);

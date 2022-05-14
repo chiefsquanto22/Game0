@@ -126,6 +126,7 @@ namespace Game0
             foreach (Cactus cac in cactus) cac.Draw(_spriteBatch);
             man.Draw(gameTime, _spriteBatch);
             // TODO: Add your drawing code here
+            if (gameTime.TotalGameTime.TotalSeconds < 15) _spriteBatch.DrawString(_spriteFont, "You must find the treasures.", new Vector2(750, 600), Color.Black);
             _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(man.HealthPosition.X, man.HealthPosition.Y), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);

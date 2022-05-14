@@ -90,14 +90,10 @@ namespace Game0
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+            foreach( var t in treasure)
             {
-                _screenManager.AddScreen(new PauseMenuScreen(), null);
-                man.Paused = true;
-            }
-            man.Paused = false;
-            foreach (var t in treasure)
-            {
-                if (!t.Collected && t.Bounds.CollidesWith(man.Bounds))
+                if(!t.Collected && t.Bounds.CollidesWith(man.Bounds))
                 {
                     t.Collected = true;
                     treasurePickup.Play();
@@ -112,7 +108,7 @@ namespace Game0
             }
             man.Update(gameTime);
             // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 

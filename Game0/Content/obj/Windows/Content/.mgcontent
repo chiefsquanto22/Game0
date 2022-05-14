@@ -8,12 +8,16 @@
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/colored_packed.png</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/gradient.png</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/Hit_Hurt.wav</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/Pickup_Coin14.wav</File>
+    <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/sheet.png</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/spritesheet_caveman.png</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/Text Font.spritefont</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/tilemap.png</File>
     <File>C:/Users/John Neil/source/repos/TheDesert/Game0/Content/wind1.mp3</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

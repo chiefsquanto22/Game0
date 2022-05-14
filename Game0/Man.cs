@@ -28,6 +28,9 @@ namespace Game0
         KeyboardState keyboardState;
         Game game;
 
+        private Vector2 healthPosition;
+        public Vector2 HealthPosition => healthPosition;
+
         private BoundingRectangle bounds;
         public BoundingRectangle Bounds => bounds;
         public Vector2 Position => position;
@@ -37,10 +40,11 @@ namespace Game0
 
         public Man(Game game)
         {
-            position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
-            this.game = game;
-            this.bounds = new BoundingRectangle(new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2), 32, 32);
-            Center = new Vector2(position.X + 8, position.Y + 8);
+            position = new Vector2(16 * 50, 16 * 50);
+            healthPosition = new Vector2(position.X - 400, position.Y - 240);
+
+            this.bounds = new BoundingRectangle(new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2), 14, 32);
+            Center = new Vector2(position.X + 16, position.Y + 16);
         }
         /// <summary>
         /// Loads the texture to render
@@ -122,14 +126,36 @@ namespace Game0
                 }
                 healthTimer -= 1.0;
             }
-            if (position.X < -16) position.X = game.GraphicsDevice.Viewport.Width;
-            if (position.Y < -32) position.Y = game.GraphicsDevice.Viewport.Height;
-            if (position.X > game.GraphicsDevice.Viewport.Width) position.X = -16;
-            if (position.Y > game.GraphicsDevice.Viewport.Height) position.Y = -32;
+            //if (position.X < -16) position.X = game.GraphicsDevice.Viewport.Width;
+            //if (position.Y < -32) position.Y = game.GraphicsDevice.Viewport.Height;
+            //if (position.X > game.GraphicsDevice.Viewport.Width) position.X = -16;
+            //if (position.Y > game.GraphicsDevice.Viewport.Height) position.Y = -32;
             Colliding = false;
-            bounds.X = position.X;
+            bounds.X = position.X + 7;
             bounds.Y = position.Y;
+
+
+            if (position.X < game.GraphicsDevice.Viewport.Width / 2) healthPosition.X = 0;
+            if (position.Y < game.GraphicsDevice.Viewport.Height / 2) healthPosition.Y = 0;
+            if (position.X > 1600 - (game.GraphicsDevice.Viewport.Width / 2))
+            {
+                healthPosition.X = 1600 - game.GraphicsDevice.Viewport.Width;
+                healthPosition.Y = position.Y - 240;
+            }
+            if (position.Y > 1600 - (game.GraphicsDevice.Viewport.Height / 2))
+            {
+                healthPosition.Y = 1600 - game.GraphicsDevice.Viewport.Height;
+                healthPosition.X = position.X - 400;
+            }
+
+
+            else
+            {
+                healthPosition.X = position.X - 400;
+                healthPosition.Y = position.Y - 240;
+            }
         }
+
         /// <summary>
         /// Draws the sprite 
         /// </summary>

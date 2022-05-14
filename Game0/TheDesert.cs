@@ -19,11 +19,11 @@ namespace Game0
         private readonly ScreenManager _screenManager;
         private SpriteFont _spriteFont;
         private Man man;
-
+        private Treasure[] treasure;
         private Song backgroundNoise;
         Random rnd = new Random();
         List<Cactus> cactus;
-
+        private SoundEffect treasurePickup;
         private TileMap _tileMap;
         public TheDesert()
         {
@@ -46,14 +46,21 @@ namespace Game0
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            treasure = new Treasure[]
+            {
+                new Treasure(this, new Vector2((float)rnd.NextDouble()*1600,(float)rnd.NextDouble()*1600),(int)Treasures.Bars),
+                new Treasure(this, new Vector2((float)rnd.NextDouble()*1600,(float)rnd.NextDouble()*1600),(int)Treasures.Coins),
+                new Treasure(this, new Vector2((float)rnd.NextDouble()*1600,(float)rnd.NextDouble()*1600),(int)Treasures.Crown),
+                new Treasure(this, new Vector2((float)rnd.NextDouble()*1600,(float)rnd.NextDouble()*1600),(int)Treasures.Goblet),
+                new Treasure(this, new Vector2((float)rnd.NextDouble()*1600,(float)rnd.NextDouble()*1600),(int)Treasures.Pile),
+            };
 
             cactus = new List<Cactus>();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var position = new Vector2(
-                    rnd.Next(0, GraphicsDevice.Viewport.Width - 16),
-                    rnd.Next(0, GraphicsDevice.Viewport.Height - 16)
+                    rnd.Next(0, 16 * 99),
+                    rnd.Next(0, 16 * 99)
                     );
 
                 cactus.Add(new Cactus(this, position));
@@ -67,12 +74,13 @@ namespace Game0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
-
+            treasurePickup = Content.Load<SoundEffect>("Pickup_Coin14");
             backgroundNoise = Content.Load<Song>("wind1");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroundNoise);
 
             man.LoadContent(Content);
+            foreach (Treasure t in treasure) t.LoadContent();
             foreach (Cactus cac in cactus) cac.LoadContent();
             _tileMap.LoadContent(Content);
 
@@ -83,7 +91,14 @@ namespace Game0
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            foreach (var cac in cactus) cac.Update(gameTime);
+            foreach( var t in treasure)
+            {
+                if(!t.Collected && t.Bounds.CollidesWith(man.Bounds))
+                {
+                    t.Collected = true;
+                    treasurePickup.Play();
+                }
+            }
             foreach (var cac in cactus)
             {
                 if (man.Bounds.CollidesWith(cac.Bounds))
@@ -99,18 +114,19 @@ namespace Game0
 
         protected override void Draw(GameTime gameTime)
         {
-            float playerX = MathHelper.Clamp(man.Position.X, 200, 16 * 50);
-            float playerY = MathHelper.Clamp(man.Position.Y, 200, 16 * 50);
+            float playerX = MathHelper.Clamp(man.Position.X, GraphicsDevice.Viewport.Width / 2, 16 * 100 - GraphicsDevice.Viewport.Width / 2);
+            float playerY = MathHelper.Clamp(man.Position.Y, GraphicsDevice.Viewport.Height / 2, 16 * 100 - GraphicsDevice.Viewport.Height / 2);
             float offsetX = GraphicsDevice.Viewport.Width / 2 - playerX;
             float offsetY = GraphicsDevice.Viewport.Height / 2 - playerY;
             Matrix transform;
             transform = Matrix.CreateTranslation(offsetX, offsetY, 0);
             _spriteBatch.Begin(transformMatrix: transform);
             _tileMap.Draw(gameTime, _spriteBatch);
+            foreach (Treasure t in treasure) t.Draw(_spriteBatch);
             foreach (Cactus cac in cactus) cac.Draw(_spriteBatch);
             man.Draw(gameTime, _spriteBatch);
             // TODO: Add your drawing code here
-            _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(GraphicsDevice.Viewport.Width + 16, GraphicsDevice.Viewport.Height + 16), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(man.HealthPosition.X, man.HealthPosition.Y), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

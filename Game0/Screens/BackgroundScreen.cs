@@ -13,7 +13,7 @@ namespace TheDesert.Screens
     {
         private ContentManager _content;
         private Texture2D _backgroundTexture;
-        TileMap tileMap;
+        
         public BackgroundScreen()
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.5);

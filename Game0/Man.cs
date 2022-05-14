@@ -15,7 +15,7 @@ namespace Game0
         /// <summary>
         /// The position of the man
         /// </summary>
-        private Vector2 position = new Vector2(200, 200);
+        private Vector2 position;
         public Vector2 Center;
         public bool Flipped;
         public bool Moving;
@@ -27,16 +27,19 @@ namespace Game0
         private SoundEffect cactusHurt;
         KeyboardState keyboardState;
         Game game;
+
         private BoundingRectangle bounds;
         public BoundingRectangle Bounds => bounds;
+        public Vector2 Position => position;
         public bool Colliding { get; set; }
         public int Health => health;
         private int health = 10;
 
         public Man(Game game)
         {
+            position = new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
             this.game = game;
-            this.bounds = new BoundingRectangle(new Vector2(200, 200), 32, 32);
+            this.bounds = new BoundingRectangle(new Vector2(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2), 32, 32);
             Center = new Vector2(position.X + 8, position.Y + 8);
         }
         /// <summary>
@@ -110,14 +113,14 @@ namespace Game0
                     animationTimer -= .5;
                 }
             }
-            if(healthTimer>1.0)
+            if (healthTimer > 1.0)
             {
                 if (Colliding)
                 {
                     health--;
                     cactusHurt.Play();
                 }
-                healthTimer-=1.0;
+                healthTimer -= 1.0;
             }
             if (position.X < -16) position.X = game.GraphicsDevice.Viewport.Width;
             if (position.Y < -32) position.Y = game.GraphicsDevice.Viewport.Height;

@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using TheDesert.StateManagement;
+using TheDesert.Screens;
+using TheDesert;
 
 namespace Game0
 {
@@ -13,9 +16,10 @@ namespace Game0
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private readonly ScreenManager _screenManager;
         private SpriteFont _spriteFont;
         private Man man;
-        
+
         private Song backgroundNoise;
         Random rnd = new Random();
         List<Cactus> cactus;
@@ -27,9 +31,18 @@ namespace Game0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             Window.Title = "The Desert";
+            var screenFactory = new ScreenFactory();
+            Services.AddService(typeof(IScreenFactory), screenFactory);
+            _screenManager = new ScreenManager(this);
+            Components.Add(_screenManager);
+            AddInitialScreens();
 
         }
-
+        private void AddInitialScreens()
+        {
+            _screenManager.AddScreen(new BackgroundScreen(), null);
+            _screenManager.AddScreen(new MainMenuScreen(), null);
+        }
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -54,7 +67,7 @@ namespace Game0
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _spriteFont = Content.Load<SpriteFont>("Text Font");
-            
+
             backgroundNoise = Content.Load<Song>("wind1");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroundNoise);
@@ -86,15 +99,18 @@ namespace Game0
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
+            float playerX = MathHelper.Clamp(man.Position.X, 200, 16 * 50);
+            float playerY = MathHelper.Clamp(man.Position.Y, 200, 16 * 50);
+            float offsetX = GraphicsDevice.Viewport.Width / 2 - playerX;
+            float offsetY = GraphicsDevice.Viewport.Height / 2 - playerY;
+            Matrix transform;
+            transform = Matrix.CreateTranslation(offsetX, offsetY, 0);
+            _spriteBatch.Begin(transformMatrix: transform);
             _tileMap.Draw(gameTime, _spriteBatch);
             foreach (Cactus cac in cactus) cac.Draw(_spriteBatch);
             man.Draw(gameTime, _spriteBatch);
             // TODO: Add your drawing code here
-            _spriteBatch.DrawString(_spriteFont, "If you wanna leave the desert, all you gotta do is escape, partner.", new Vector2(16, 16), Color.Black);
-            _spriteBatch.DrawString(_spriteFont, "Punch a cactus. You won't.", new Vector2(16, 32), Color.Black);
-            _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(16, 46), Color.Black);
+            _spriteBatch.DrawString(_spriteFont, "Health: " + man.Health, new Vector2(GraphicsDevice.Viewport.Width + 16, GraphicsDevice.Viewport.Height + 16), Color.Black);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

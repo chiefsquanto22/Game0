@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TheDesert.Collision;
 using Microsoft.Xna.Framework;
+
 namespace TheDesert.Collision
 {
     public class BoundingRectangle
